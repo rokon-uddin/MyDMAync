@@ -23,7 +23,7 @@ struct MyDMAyncApp: App {
                 .onAppear {
                     Task {
                         await viewModel.download((0 ..< Constants.downloadCount).map { index -> ViewModel.Item in
-                            let size = Int.random(in: 1000 ... Constants.maxFileSize)
+                            let size = Int.random(in: 99900 ... Constants.maxFileSize)
                             return .init(
                                 id: index,
                                 url: Constants.httpbin.appendingPathComponent("/bytes/\(size)"),

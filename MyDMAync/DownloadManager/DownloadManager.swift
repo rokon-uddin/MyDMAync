@@ -150,20 +150,6 @@ public actor DownloadManager: NSObject, ObservableObject {
         return .idle
     }
 
-    /// Calculate the progress of a subset of downloads in the queue.
-    @MainActor public static func progress(of downloads: [Download]) -> DownloadProgress {
-        let progress = DownloadProgress(children: downloads.map(\.progress))
-        return progress
-    }
-
-    /// Calculate the state of a subset of downloads in the queue.
-    @MainActor public static func state(of downloads: [Download]) -> (status: DownloadStatus, progress: DownloadProgress) {
-        (
-            status: Self.calculateStatus(for: downloads),
-            progress: Self.progress(of: downloads)
-        )
-    }
-
     /// Adds one or more downloads to the end of the download queue.
     public func append(_ downloads: [Download]) async {
         for download in downloads {
